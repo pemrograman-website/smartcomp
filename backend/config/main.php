@@ -45,6 +45,12 @@ return [
             ],
         ],
         */
+        // Karena BS4 sdh include di AdminLTE 3, maka asset dihilangkan agar BS4 tdk diload ulang
+        'assetManager' => [
+            'bundles' => [
+                \yii\bootstrap4\BootstrapAsset::class => false
+            ],
+        ],
     ],
     'params' => $params,
 ];
