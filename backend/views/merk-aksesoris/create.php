@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\MerkAksesoris */
 
-$this->title = 'Create Merk Aksesoris';
+$this->title = 'Tambah Merk Aksesoris';
 $this->params['breadcrumbs'][] = ['label' => 'Merk Aksesoris', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
