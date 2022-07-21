@@ -11,11 +11,12 @@ use yii\bootstrap4\Breadcrumbs;
                 <div class="col-sm-6">
                     <h1 class="m-0">
                         <?php
-                        if (!is_null($this->title)) {
-                            echo \yii\helpers\Html::encode($this->title);
-                        } else {
-                            echo \yii\helpers\Inflector::camelize($this->context->id);
-                        }
+                        // Title dihilangkan saja
+                        // if (!is_null($this->title)) {
+                        //     echo \yii\helpers\Html::encode($this->title);
+                        // } else {
+                        //     echo \yii\helpers\Inflector::camelize($this->context->id);
+                        // }
                         ?>
                     </h1>
                 </div><!-- /.col -->
@@ -36,7 +37,8 @@ use yii\bootstrap4\Breadcrumbs;
 
     <!-- Main content -->
     <div class="content">
-        <?= $content ?><!-- /.container-fluid -->
+        <?= $content ?>
+        <!-- /.container-fluid -->
     </div>
     <!-- /.content -->
 </div>

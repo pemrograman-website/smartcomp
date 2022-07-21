@@ -49,12 +49,13 @@
                     ['label' => 'RBAC',  'icon' => 'user', 'url' => ['/admin']],
                     ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
                     ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank'],
+                    ['label' => 'MASTER DATA', 'header' => true],
+                    ['label' => 'Supplier', 'icon' => 'user', 'url' => ['/supplier']],
                     ['label' => 'AKSESORIS', 'header' => true],
-                    ['label' => 'Merk Aksesoris'],
-                    ['label' => 'Jenis Aksesoris'],
-
-                    ['label' => 'Aksesoris'],
-                    ['label' => 'Pembelian Aksesoris'],
+                    ['label' => 'Merk Aksesoris', 'icon' => 'user', 'url' => ['/merk-aksesoris']],
+                    ['label' => 'Jenis Aksesoris', 'icon' => 'user', 'url' => ['/jenis-aksesoris']],
+                    ['label' => 'Aksesoris', 'icon' => 'user', 'url' => ['/aksesoris']],
+                    ['label' => 'Pembelian Aksesoris', 'icon' => 'user', 'url' => ['/pembelian-aksesoris']],
                     ['label' => 'Penjualan Aksesoris'],
                     // [
                     //     'label' => 'Level1',
