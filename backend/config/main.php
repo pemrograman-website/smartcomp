@@ -5,25 +5,14 @@ $params = array_merge(
     require __DIR__ . '/params.php',
     require __DIR__ . '/params-local.php'
 );
+$modules = require __DIR__ . '/modules.php';
 
 return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [
-        'admin' => [
-            'class' => 'mdm\admin\Module',
-            'layout' => 'right-menu',
-            'mainLayout' => '@app/views/layouts/main.php',
-        ],
-        'as access' => [
-            'class' => 'mdm\admin\component\AccessController',
-            'allowActions' => [
-                '*',
-            ]
-        ]
-    ],
+    'modules' => $modules,
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
