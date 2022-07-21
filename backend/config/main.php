@@ -11,7 +11,19 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'admin' => [
+            'class' => 'mdm\admin\Module',
+            'layout' => 'right-menu',
+            'mainLayout' => '@app/views/layouts/main.php',
+        ],
+        'as access' => [
+            'class' => 'mdm\admin\component\AccessController',
+            'allowActions' => [
+                '*',
+            ]
+        ]
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
