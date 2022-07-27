@@ -36,7 +36,7 @@ use yii\bootstrap4\Breadcrumbs;
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <div class="content">
+    <div class="content m-2">
         <?= $content ?>
         <!-- /.container-fluid -->
     </div>
