@@ -20,6 +20,8 @@ use common\models\User;
  */
 class PembelianAksesoris extends \yii\db\ActiveRecord
 {
+
+    const SESSION_KEY = 'beli-aksesoris';
     /**
      * {@inheritdoc}
      */
@@ -34,10 +36,9 @@ class PembelianAksesoris extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tanggal'], 'safe'],
+            [['tanggal', 'supplier_id'], 'required'],
+            [['keterangan', 'user_id', 'supplier_id'], 'safe'],
             [['harga_total'], 'number'],
-            [['supplier_id', 'user_id'], 'required'],
-            [['supplier_id', 'user_id'], 'integer'],
             [['no_inv'], 'string', 'max' => 45],
             [['supplier_id'], 'exist', 'skipOnError' => true, 'targetClass' => Supplier::className(), 'targetAttribute' => ['supplier_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -56,7 +57,20 @@ class PembelianAksesoris extends \yii\db\ActiveRecord
             'harga_total' => 'Harga Total',
             'supplier_id' => 'Supplier ID',
             'user_id' => 'User ID',
+            'keterangan' => 'Keterangan',
         ];
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            $this->tanggal = date('Y-m-d', strtotime($this->tanggal));
+            $this->user_id = \Yii::$app->user->id;
+
+            return true;
+        }
+
+        return false;
     }
 
     /**
