@@ -3,6 +3,8 @@
 namespace backend\models;
 
 use Yii;
+use yii\db\Query;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "supplier".
@@ -64,5 +66,17 @@ class Supplier extends \yii\db\ActiveRecord
     public function getPembelianAksesoris()
     {
         return $this->hasMany(PembelianAksesoris::className(), ['supplier_id' => 'id']);
+    }
+
+    public static function list()
+    {
+        $query = new Query;
+
+        $query->from('supplier');
+        $query->orderBy(['nama' => SORT_ASC]);
+
+        $list = $query->all();
+
+        return ArrayHelper::map($list, 'id', 'nama');
     }
 }

@@ -3,6 +3,8 @@
 namespace backend\models;
 
 use Yii;
+use yii\db\Query;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "merk_aksesoris".
@@ -44,5 +46,22 @@ class MerkAksesoris extends \yii\db\ActiveRecord
             'nama' => 'Nama',
             'disabled' => 'Disabled',
         ];
+    }
+
+    public static function list()
+    {
+        $query = new Query;
+
+        $query->from('merk_aksesoris');
+        $query->orderBy(['nama' => SORT_ASC]);
+
+        $list = $query->all();
+
+        return ArrayHelper::map($list, 'id', 'nama');
+    }
+
+    public static function getMerk($id)
+    {
+        $aksesoris = $this->find($id)->one();
     }
 }
