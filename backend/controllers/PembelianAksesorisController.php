@@ -107,6 +107,18 @@ class PembelianAksesorisController extends Controller
                     ];
 
                     $insertDaftarPembelian[] = $itemDataDaftarPembelian;
+
+                    // Updating stock on hand
+                    $stok_akhir = Aksesoris::findOne($item['id'])->stock_on_hand;
+
+                    \Yii::$app->db->createCommand()->update(
+                        'aksesoris',
+                        [
+                            'stock_on_hand' => $stok_akhir + $item['jumlah']
+                        ],
+                        'id = :id',
+                        [':id' => $item['id']]
+                    )->execute();
                 }
 
                 // Simpan semua model PembelianAksesorisDetail secara bersamaan, tampilkan kalo terjadi error

@@ -50,7 +50,7 @@ if ($jumlahItem != 0) :
     </tr>
 <?php else : ?>
     <tr>
-        <td colspan="5" class="text-center text-muted font-italic">Silahkan tambahkan aksesoris yang ingin dibeli.</td>
+        <td colspan="6" class="text-center text-muted font-italic">Silahkan tambahkan aksesoris yang ingin dibeli.</td>
     </tr>
 <?php
 endif;
