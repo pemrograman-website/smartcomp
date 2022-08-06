@@ -13,6 +13,7 @@ use yii\helpers\ArrayHelper;
 
 // Models
 use backend\models\Aksesoris;
+use backend\models\PembelianAksesorisDetail;
 
 /**
  * PembelianAksesorisController implements the CRUD actions for PembelianAksesoris model.
@@ -61,8 +62,20 @@ class PembelianAksesorisController extends Controller
      */
     public function actionView($id)
     {
+        // $daftarPembelian = PembelianAksesorisDetail::find()->where(['pembelian_aksesoris_id' => $id])->asArray()->all();
+
+        $daftarPembelianSQL = "SELECT a.nama barang,m.nama merk,pad.qty,pad.harga_beli
+                               FROM pembelian_aksesoris_detail pad
+                               INNER JOIN aksesoris a ON a.id=pad.aksesoris_id
+                               INNER JOIN merk_aksesoris m ON m.id=a.merk_aksesoris_id
+                               WHERE pembelian_aksesoris_id='$id'";
+        // var_dump($daftarPembelianSQL);
+        // die();
+        $daftarPembelian = \Yii::$app->db->createCommand($daftarPembelianSQL)->queryAll();
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'daftarPembelian' => $daftarPembelian,
         ]);
     }
 

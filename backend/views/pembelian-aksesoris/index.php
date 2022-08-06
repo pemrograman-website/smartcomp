@@ -32,11 +32,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'no_inv',
-            'tanggal',
+            [
+                'attribute' => 'tanggal',
+                'format' => ['date', 'php:d mm yy'],
+            ],
+            [
+                'label' => 'Supplier',
+                'attribute' => 'supplier.nama',
+            ],
+            'no_inv', //'user_id',
             'harga_total',
-            'supplier_id',
-            //'user_id',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, PembelianAksesoris $model, $key, $index, $column) {
