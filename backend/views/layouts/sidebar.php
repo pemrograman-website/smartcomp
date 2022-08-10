@@ -33,52 +33,91 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <?php
+
+            $itemAdmin = [
+                ['label' => 'Yii2 PROVIDED', 'header' => true],
+                ['label' => 'RBAC', 'icon' => 'user', 'url' => ['/admin']],
+                ['label' => 'Gii', 'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
+                ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank'],
+                ['label' => 'MASTER DATA', 'header' => true],
+                ['label' => 'Supplier', 'icon' => 'user', 'url' => ['/supplier']],
+                ['label' => 'AKSESORIS', 'header' => true],
+                ['label' => 'Merk Aksesoris', 'icon' => 'user', 'url' => ['/merk-aksesoris']],
+                ['label' => 'Jenis Aksesoris', 'icon' => 'user', 'url' => ['/jenis-aksesoris']],
+                ['label' => 'Aksesoris', 'icon' => 'user', 'url' => ['/aksesoris']],
+                ['label' => 'Pembelian Aksesoris', 'icon' => 'user', 'url' => ['/pembelian-aksesoris']],
+                ['label' => 'Penjualan Aksesoris'],
+                ['label' => 'UNIT', 'header' => true],
+                ['label' => 'Daftar Unit', 'icon' => 'user', 'url' => ['/unit']],
+            ];
+
+            $itemAkuntan = [
+                ['label' => 'AKSESORIS', 'header' => true],
+                ['label' => 'Pembelian Aksesoris', 'icon' => 'user', 'url' => ['/pembelian-aksesoris']],
+                ['label' => 'Penjualan Aksesoris'],
+            ];
+
+            $itemServis = [];
+
+            if (Yii::$app->authManager->checkAccess(Yii::$app->user->identity->id, 'admin')) {
+                $items = $itemAdmin;
+            } else if (Yii::$app->authManager->checkAccess(Yii::$app->user->identity->id, 'akuntan')) {
+                $items = $itemAkuntan;
+            } else if (Yii::$app->authManager->checkAccess(Yii::$app->user->identity->id, 'teknisi')) {
+                $items = $itemTeknisi;
+            }
+
             echo \hail812\adminlte\widgets\Menu::widget([
-                'items' => [
-                    // [
-                    //     'label' => 'Starter Pages',
-                    //     'icon' => 'tachometer-alt',
-                    //     'badge' => '<span class="right badge badge-info">2</span>',
-                    //     'items' => [
-                    //         ['label' => 'Active Page', 'url' => ['site/index'], 'iconStyle' => 'far'],
-                    //         ['label' => 'Inactive Page', 'iconStyle' => 'far'],
-                    //     ]
-                    // ],
-                    // ['label' => 'Simple Link', 'icon' => 'th', 'badge' => '<span class="right badge badge-danger">New</span>'],
-                    ['label' => 'Yii2 PROVIDED', 'header' => true],
-                    ['label' => 'RBAC',  'icon' => 'user', 'url' => ['/admin']],
-                    ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
-                    ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank'],
-                    ['label' => 'MASTER DATA', 'header' => true],
-                    ['label' => 'Supplier', 'icon' => 'user', 'url' => ['/supplier']],
-                    ['label' => 'AKSESORIS', 'header' => true],
-                    ['label' => 'Merk Aksesoris', 'icon' => 'user', 'url' => ['/merk-aksesoris']],
-                    ['label' => 'Jenis Aksesoris', 'icon' => 'user', 'url' => ['/jenis-aksesoris']],
-                    ['label' => 'Aksesoris', 'icon' => 'user', 'url' => ['/aksesoris']],
-                    ['label' => 'Pembelian Aksesoris', 'icon' => 'user', 'url' => ['/pembelian-aksesoris']],
-                    ['label' => 'Penjualan Aksesoris'],
-                    // [
-                    //     'label' => 'Level1',
-                    //     'items' => [
-                    //         ['label' => 'Level2', 'iconStyle' => 'far'],
-                    //         [
-                    //             'label' => 'Level2',
-                    //             'iconStyle' => 'far',
-                    //             'items' => [
-                    //                 ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle'],
-                    //                 ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle'],
-                    //                 ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle']
-                    //             ]
-                    //         ],
-                    //         ['label' => 'Level2', 'iconStyle' => 'far']
-                    //     ]
-                    // ],
-                    // ['label' => 'Level1'],
-                    // ['label' => 'LABELS', 'header' => true],
-                    // ['label' => 'Important', 'iconStyle' => 'far', 'iconClassAdded' => 'text-danger'],
-                    // ['label' => 'Warning', 'iconClass' => 'nav-icon far fa-circle text-warning'],
-                    // ['label' => 'Informational', 'iconStyle' => 'far', 'iconClassAdded' => 'text-info'],
-                ],
+                'items' => $items
+                // 'items' => 
+                // [
+                //     // [
+                //     //     'label' => 'Starter Pages',
+                //     //     'icon' => 'tachometer-alt',
+                //     //     'badge' => '<span class="right badge badge-info">2</span>',
+                //     //     'items' => [
+                //     //         ['label' => 'Active Page', 'url' => ['site/index'], 'iconStyle' => 'far'],
+                //     //         ['label' => 'Inactive Page', 'iconStyle' => 'far'],
+                //     //     ]
+                //     // ],
+                //     // ['label' => 'Simple Link', 'icon' => 'th', 'badge' => '<span class="right badge badge-danger">New</span>'],
+                //     ['label' => 'Yii2 PROVIDED', 'header' => true],
+                //     ['label' => 'RBAC',  'icon' => 'user', 'url' => ['/admin']],
+                //     ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
+                //     ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank'],
+                //     ['label' => 'MASTER DATA', 'header' => true],
+                //     ['label' => 'Supplier', 'icon' => 'user', 'url' => ['/supplier']],
+                //     ['label' => 'AKSESORIS', 'header' => true],
+                //     ['label' => 'Merk Aksesoris', 'icon' => 'user', 'url' => ['/merk-aksesoris']],
+                //     ['label' => 'Jenis Aksesoris', 'icon' => 'user', 'url' => ['/jenis-aksesoris']],
+                //     ['label' => 'Aksesoris', 'icon' => 'user', 'url' => ['/aksesoris']],
+                //     ['label' => 'Pembelian Aksesoris', 'icon' => 'user', 'url' => ['/pembelian-aksesoris']],
+                //     ['label' => 'Penjualan Aksesoris'],
+                //     ['label' => 'UNIT', 'header' => true],
+                //     ['label' => 'Daftar Unit', 'icon' => 'user', 'url' => ['/unit']],
+
+                //     // [
+                //     //     'label' => 'Level1',
+                //     //     'items' => [
+                //     //         ['label' => 'Level2', 'iconStyle' => 'far'],
+                //     //         [
+                //     //             'label' => 'Level2',
+                //     //             'iconStyle' => 'far',
+                //     //             'items' => [
+                //     //                 ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle'],
+                //     //                 ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle'],
+                //     //                 ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle']
+                //     //             ]
+                //     //         ],
+                //     //         ['label' => 'Level2', 'iconStyle' => 'far']
+                //     //     ]
+                //     // ],
+                //     // ['label' => 'Level1'],
+                //     // ['label' => 'LABELS', 'header' => true],
+                //     // ['label' => 'Important', 'iconStyle' => 'far', 'iconClassAdded' => 'text-danger'],
+                //     // ['label' => 'Warning', 'iconClass' => 'nav-icon far fa-circle text-warning'],
+                //     // ['label' => 'Informational', 'iconStyle' => 'far', 'iconClassAdded' => 'text-info'],
+                // ],
             ]);
             ?>
         </nav>
